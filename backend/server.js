@@ -11,14 +11,21 @@ const PORT = process.env.PORT || 5001
 const app = express()
 
 // Middleware
-app.use(cors({ origin: "http://localhost:5173" }))
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://your-frontend.onrender.com"  // add your actual frontend URL here
+  ]
+}))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(rateLimiter)
 
 // Routes
 app.use("/api/notes", notesRoutes)
-
+app.get('/', (req, res) => {
+  res.json({ message: 'API is running' });
+});
 app.get("/favicon.ico", (req, res) => res.status(204).end())
 
 // Connect DB then start server

@@ -13,6 +13,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router"
 import axios from "axios"
 import toast from "react-hot-toast"
+import { API_BASE } from "../config"
 
 const CreatePage = () => {
   const [title, setTitle] = useState("")
@@ -31,7 +32,7 @@ const CreatePage = () => {
 
     setLoading(true)
     try {
-      await axios.post("/api/notes", { title, content })
+      await axios.post("API_BASE", { title, content })
       toast.success("Note created successfully!")
       navigate("/") // go back to homepage
     } catch (error) {

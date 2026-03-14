@@ -1,7 +1,62 @@
+// import { useEffect, useState } from "react"
+// import { useParams, useNavigate } from "react-router"
+// import axios from "axios"
+// import toast from "react-hot-toast"
+// import { API_BASE } from "../config" 
+
+// const NoteDetailPage = () => {
+//   const { id } = useParams()
+//   const navigate = useNavigate()
+
+//   const [title, setTitle] = useState("")
+//   const [content, setContent] = useState("")
+//   const [loading, setLoading] = useState(true)
+//   const [saving, setSaving] = useState(false)
+
+//   // Fetch existing note
+//   useEffect(() => {
+//     const fetchNote = async () => {
+//       try {
+//         const res = await axios.get(`/api/notes/${id}`)
+//         setTitle(res.data.title)
+//         setContent(res.data.content)
+//       } catch (error) {
+//         toast.error("Failed to load note")
+//         console.log("Error fetching note", error)
+//       } finally {
+//         setLoading(false)
+//       }
+//     }
+//     fetchNote()
+//   }, [id])
+
+//   // Save updated note
+//   const handleSave = async (e) => {
+//     e.preventDefault()
+
+//     if (!title || !content) {
+//       toast.error("Please fill in all fields")
+//       return
+//     }
+
+//     setSaving(true)
+//     try {
+//       await axios.put(`/api/notes/${id}`, { title, content })
+//       toast.success("Note updated successfully!")
+//       navigate("/")
+//     } catch (error) {
+//       toast.error("Failed to update note")
+//       console.log("Error updating note", error)
+//     } finally {
+//       setSaving(false)
+//     }
+//   }
+
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router"
 import axios from "axios"
 import toast from "react-hot-toast"
+import { API_BASE } from "../config"        // ← added
 
 const NoteDetailPage = () => {
   const { id } = useParams()
@@ -12,11 +67,10 @@ const NoteDetailPage = () => {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
 
-  // Fetch existing note
   useEffect(() => {
     const fetchNote = async () => {
       try {
-        const res = await axios.get(`/api/notes/${id}`)
+        const res = await axios.get(`${API_BASE}/${id}`)   // ← changed
         setTitle(res.data.title)
         setContent(res.data.content)
       } catch (error) {
@@ -29,7 +83,6 @@ const NoteDetailPage = () => {
     fetchNote()
   }, [id])
 
-  // Save updated note
   const handleSave = async (e) => {
     e.preventDefault()
 
@@ -40,7 +93,7 @@ const NoteDetailPage = () => {
 
     setSaving(true)
     try {
-      await axios.put(`/api/notes/${id}`, { title, content })
+      await axios.put(`${API_BASE}/${id}`, { title, content })  // ← changed
       toast.success("Note updated successfully!")
       navigate("/")
     } catch (error) {
