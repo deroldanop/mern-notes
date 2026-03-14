@@ -14,7 +14,7 @@ const app = express()
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://mern-notes-frontend.onrender.com"  // add your actual frontend URL here
+    "https://mern-notes-frontend-ry0o.onrender.com/"  // add your actual frontend URL here
   ]
 }))
 app.use(express.json())
