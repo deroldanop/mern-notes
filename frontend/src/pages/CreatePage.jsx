@@ -32,7 +32,7 @@ const CreatePage = () => {
 
     setLoading(true)
     try {
-      await axios.post("API_BASE", { title, content })
+      await axios.post(API_BASE, { title, content })
       toast.success("Note created successfully!")
       navigate("/") // go back to homepage
     } catch (error) {
