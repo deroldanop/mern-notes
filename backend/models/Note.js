@@ -1,23 +1,3 @@
-// import mongoose from "mongoose";
-
-// const noteschema = new mongoose.Schema(
-//   {
-//     title: {
-//       type: String,
-//       require: true,
-//     },
-//     content: {
-//       type: String,
-//       require: true,
-//     },
-//   },
-//   { timestamps: true },
-// );
-
-// const Note = mongoose.model("Note", noteschema);
-
-// export default Note;
-
 import mongoose from "mongoose";
 
 const noteSchema = new mongoose.Schema(
@@ -30,8 +10,16 @@ const noteSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    attachments: [
+      {
+        url: String,
+        publicId: String,
+        resourceType: String,
+        originalName: String,
+      }
+    ],
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 export default mongoose.model("Note", noteSchema);
